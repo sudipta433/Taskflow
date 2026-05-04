@@ -1,83 +1,81 @@
-# Taskflow — Task Manager App
+<div align="center">
+  <h1>Taskflow</h1>
+  <p>A beautiful, minimal, and highly functional task manager built with React and Redux.</p>
 
-A minimal, dark-themed task manager built with **React**, **Redux**, and **JSON Server**. Designed with a Material Design 3 inspired dark palette for a clean, professional look.
+  [![Live Demo](https://img.shields.io/badge/Live_Demo-View_Site-6750a4?style=for-the-badge&logo=github)](https://sudipta433.github.io/Taskflow/)
+</div>
 
-## Features
+<br />
 
-- **Add tasks** with priority levels (Low, Medium, High)
-- **Edit tasks** — update title, priority, and completion status via modal
-- **Delete tasks** with one click
-- **Toggle completion** — click the circular checkbox to mark done/pending
-- **Filter tasks** — view All, Active, or Completed tasks
-- **Live stats** — see Completed count, Pending count, and Efficiency %
-- **Priority badges** — color-coded labels (High, Medium, Low) on hover
-- **Hover interactions** — accent bar + action buttons appear on row hover
-- **Persistent storage** — tasks are stored via JSON Server REST API
+Taskflow is designed with a **Material Design 3** inspired dark palette for a clean, professional, and distraction-free look. All tasks are saved locally to your browser, so you can start organizing your day immediately without any setup.
 
-## Tech Stack
+## ✨ Features
 
-- React 18
-- Redux + Redux Thunk (async actions)
-- React Hook Form (form handling)
-- React Hot Toast (notifications)
-- Axios (HTTP client)
-- JSON Server (mock REST API)
-- Vite (build tool)
+- **Prioritize Your Day**: Add tasks with priority levels (Low, Medium, High).
+- **Edit & Refine**: Update task titles, priorities, and completion status via a sleek modal.
+- **Quick Toggles**: Click the circular checkbox to mark tasks as done or pending instantly.
+- **Smart Filtering**: Easily filter your view to show All, Active, or Completed tasks.
+- **Live Statistics**: Keep track of your progress with live Completed, Pending, and Efficiency metrics.
+- **Visual Cues**: Color-coded priority badges and hover accent bars make scanning your list effortless.
+- **Persistent Storage**: Uses `localStorage` to save your tasks, keeping them safe between sessions without needing a backend.
 
-## Getting Started
+## 🚀 Live Demo
 
-### 1. Install dependencies
+**[Try Taskflow Here](https://sudipta433.github.io/Taskflow/)**
 
+## 🛠️ Tech Stack
+
+- **Framework**: React 18
+- **State Management**: Redux + Redux Thunk
+- **Form Handling**: React Hook Form
+- **Notifications**: React Hot Toast
+- **Build Tool**: Vite
+- **Styling**: Pure CSS (Custom M3 Dark Theme)
+- **Deployment**: GitHub Actions + GitHub Pages
+
+## 💻 Running Locally
+
+Since the app uses `localStorage`, you don't need to run a backend server. Just start the frontend!
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/sudipta433/Taskflow.git
+cd Taskflow
+```
+
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 2. Start the API server
-
-```bash
-npm run api
-```
-
-This starts JSON Server on `http://localhost:3001` serving `db.json`.
-
 ### 3. Start the dev server
-
 ```bash
 npm run dev
 ```
 
-Open `http://localhost:5173` (or the port shown in terminal).
+Open `http://localhost:5173` in your browser.
 
-## Project Structure
+## 📂 Project Structure
 
-```
+```text
 src/
 ├── actions/          # Redux action creators (async thunks)
 ├── components/       # React components
 │   ├── Navbar.jsx        # Top navigation bar
-│   ├── Header.jsx        # Page header with stats
+│   ├── Header.jsx        # Page header with live stats
 │   ├── AddTask.jsx       # Command-line style task input
-│   ├── ListTasks.jsx     # Task list with filters
+│   ├── ListTasks.jsx     # Task list with filters & hover states
 │   ├── UpdateTaskModal.jsx  # Edit task modal
-│   └── Loader.jsx        # Top loading bar
+│   └── Loader.jsx        # Top loading progress bar
 ├── reducers/         # Redux reducers
 ├── store/            # Redux store configuration
 ├── constants.js      # Action types + priority/filter enums
 ├── App.jsx           # Root component
 ├── App.css           # App-level overrides
-├── index.css         # Global styles (M3 dark theme)
+├── index.css         # Global styles (M3 dark theme system)
 └── main.jsx          # Entry point
 ```
 
-## API Endpoints
+## 📄 License
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/tasks` | Fetch all tasks |
-| POST | `/tasks` | Create a new task |
-| PATCH | `/tasks/:id` | Update a task |
-| DELETE | `/tasks/:id` | Delete a task |
-
-## License
-
-MIT
+MIT License
