@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   ADD_TASK_FAILURE,
   ADD_TASK_STARTED,
@@ -14,6 +13,17 @@ import {
   UPDATE_TASK_FAILURE,
 } from "../constants";
 
+// Helper to get tasks from localStorage
+const getLocalTasks = () => {
+  const tasks = localStorage.getItem("tasks");
+  return tasks ? JSON.parse(tasks) : [];
+};
+
+// Helper to save tasks to localStorage
+const saveLocalTasks = (tasks) => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
 export const getTasks = () => {
   return async (dispatch) => {
     try {
@@ -22,16 +32,18 @@ export const getTasks = () => {
         payload: [],
       });
 
-      const result = await axios.get(`http://localhost:3001/tasks`);
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const data = getLocalTasks();
 
       dispatch({
         type: GET_TASKS_SUCCESS,
-        payload: result.data,
+        payload: data,
       });
     } catch (error) {
       dispatch({
         type: GET_TASKS_FAILURE,
-        payload,
+        payload: [],
       });
       throw error;
     }
@@ -46,18 +58,19 @@ export const addTask = (payload) => {
         payload: [],
       });
 
-      const result = await axios.post(`http://localhost:3001/tasks`, {
-        ...payload,
-      });
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const tasks = getLocalTasks();
+      tasks.push(payload);
+      saveLocalTasks(tasks);
 
       dispatch({
         type: ADD_TASK_SUCCESS,
-        payload: result.data,
+        payload: payload,
       });
     } catch (error) {
       dispatch({
         type: ADD_TASK_FAILURE,
-        payload,
+        payload: [],
       });
       throw error;
     }
@@ -72,9 +85,10 @@ export const deleteTask = (payload) => {
         payload: [],
       });
 
-      const result = await axios.delete(
-        `http://localhost:3001/tasks/${payload}`
-      );
+      await new Promise(resolve => setTimeout(resolve, 500));
+      let tasks = getLocalTasks();
+      tasks = tasks.filter(task => task.id !== payload);
+      saveLocalTasks(tasks);
 
       dispatch({
         type: DELETE_TASK_SUCCESS,
@@ -83,7 +97,7 @@ export const deleteTask = (payload) => {
     } catch (error) {
       dispatch({
         type: DELETE_TASK_FAILURE,
-        payload,
+        payload: [],
       });
       throw error;
     }
@@ -98,10 +112,10 @@ export const updateTask = (payload) => {
         payload: [],
       });
 
-      const result = await axios.patch(
-        `http://localhost:3001/tasks/${payload.id}`,
-        payload
-      );
+      await new Promise(resolve => setTimeout(resolve, 500));
+      let tasks = getLocalTasks();
+      tasks = tasks.map(task => task.id === payload.id ? payload : task);
+      saveLocalTasks(tasks);
 
       dispatch({
         type: UPDATE_TASK_SUCCESS,
@@ -110,7 +124,7 @@ export const updateTask = (payload) => {
     } catch (error) {
       dispatch({
         type: UPDATE_TASK_FAILURE,
-        payload,
+        payload: [],
       });
       throw error;
     }
