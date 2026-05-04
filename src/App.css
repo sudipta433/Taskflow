@@ -1,0 +1,4 @@
+/* App-level overrides — kept minimal since index.css has the system */
+.completed-task {
+  text-decoration: line-through !important;
+}
